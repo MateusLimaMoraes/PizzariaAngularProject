@@ -1,0 +1,38 @@
+.bg-white {
+    background-color: transparent !important;
+    margin: 7px;
+}
+
+.space-y-5 {
+    max-width: 500px;
+}
+
+.min-h-screen {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.btn-submit {
+    margin-top: 15px;
+    height: 26px;
+}
+
+.text-account {
+    margin-top: 8px;
+    font-weight: bold;
+    font-size: medium;
+}
+
+.space {
+    margin-right: 148px;
+}
+
+.border-red-500 {
+  border-color: #ef4444 !important;
+}
+
+input.border-red-500:focus {
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.3) !important;
+  border-color: #ef4444 !important;
+}

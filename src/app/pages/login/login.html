@@ -1,0 +1,56 @@
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-red-50 to-orange-50 px-4">
+  <div class="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-md">
+    <div class="text-center mb-8">
+      <div class="text-6xl mb-4">🍕</div>
+      <h2 class="header2 text-3xl font-bold text-gray-800 font-serif">Bem-vindo</h2>
+      <p class="text-gray-600 mt-2">Entre para fazer seu pedido</p>
+    </div>
+    
+    <div *ngIf="errorMessage" class="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg mb-4 text-sm">
+      {{ errorMessage }}
+    </div>
+
+    <form (ngSubmit)="onLogin()" class="space-y-6">
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+        <input
+          type="email"
+          [(ngModel)]="email"
+          name="email"
+          [disabled]="isLoading"
+          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition"
+          placeholder="seu@email.com"
+        />
+      </div>
+      
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2">Senha</label>
+        <input
+          type="password"
+          [(ngModel)]="password"
+          name="password"
+          [disabled]="isLoading"
+          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition"
+          placeholder="••••••••"
+        />
+      </div>
+      
+      <button
+        type="submit"
+        [disabled]="isLoading"
+        class="w-full btn-login bg-red-600 text-white py-3 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105"
+      >
+        {{ isLoading ? 'Entrando...' : 'Entrar' }}
+      </button>
+
+      <button
+        type="button"
+        (click)="onRegister()"
+        [disabled]="isLoading"
+        class="w-full bg-white text-red-600 border-2 border-red-600 py-3 rounded-lg font-semibold hover:bg-red-50 transition"
+      >
+        {{ isLoading ? 'Cadastrando...' : 'Criar Conta' }}
+      </button>
+    </form>
+  </div>
+</div>

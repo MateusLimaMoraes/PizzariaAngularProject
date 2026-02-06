@@ -1,0 +1,65 @@
+<div class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4" (click)="onClose()">
+  <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-hidden flex flex-col" (click)="$event.stopPropagation()">
+    <div class="flex justify-between items-center p-6 border-b">
+      <h2 class="text-2xl font-bold">Seu Carrinho</h2>
+      <button
+        (click)="onClose()"
+        class="p-2 hover:bg-gray-100 rounded-full transition"
+      >
+        <lucide-icon name="x" [size]="24"></lucide-icon>
+      </button>
+    </div>
+
+    <div class="flex-1 overflow-y-auto p-6">
+      <div *ngIf="cartItems.length === 0" class="text-center py-12">
+        <div class="text-6xl mb-4">🛒</div>
+        <p class="text-gray-600 text-lg">Seu carrinho está vazio</p>
+      </div>
+
+      <div *ngIf="cartItems.length > 0" class="space-y-4">
+        <div *ngFor="let item of cartItems" class="flex items-center space-x-4 bg-gray-50 p-4 rounded-lg">
+          <div class="flex-1">
+            <h3 class="font-bold">{{ item.pizza.name }}</h3>
+            <p class="text-sm text-gray-600">R$ {{ item.pizza.price.toFixed(2) }}</p>
+          </div>
+          
+          <div class="flex items-center space-x-2">
+            <button
+              (click)="updateQuantity(item.pizza.id, -1)"
+              class="p-1 hover:bg-gray-200 rounded transition"
+            >
+              <lucide-icon name="minus" [size]="16"></lucide-icon>
+            </button>
+            <span class="w-8 text-center font-semibold">{{ item.quantity }}</span>
+            <button
+              (click)="updateQuantity(item.pizza.id, 1)"
+              class="p-1 hover:bg-gray-200 rounded transition"
+            >
+              <lucide-icon name="plus" [size]="16"></lucide-icon>
+            </button>
+          </div>
+
+          <button
+            (click)="removeItem(item.pizza.id)"
+            class="p-2 hover:bg-red-50 text-red-600 rounded transition"
+          >
+            <lucide-icon name="trash-2" [size]="20"></lucide-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="cartItems.length > 0" class="border-t p-6 space-y-4">
+      <div class="flex justify-between items-center text-xl font-bold">
+        <span>Total:</span>
+        <span class="text-red-600">R$ {{ total.toFixed(2) }}</span>
+      </div>
+      <button 
+        (click)="checkout()"
+        class="w-full bg-green-600 text-white py-4 rounded-lg font-bold text-lg hover:bg-green-700 transition"
+      >
+        Finalizar Pedido via WhatsApp
+      </button>
+    </div>
+  </div>
+</div>

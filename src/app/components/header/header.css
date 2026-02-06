@@ -1,0 +1,13 @@
+
+header .flex.justify-between {
+  justify-content: flex-start;
+  gap: 17rem;
+}
+header .flex.justify-between > div:last-child {
+  margin-left: auto;
+}
+
+header nav a {
+  text-decoration: none;
+  font-size: 1.125rem; /* 18px - ajuste como preferir */
+}
