@@ -1,0 +1,60 @@
+<header class="bg-white shadow-md sticky top-0 z-40">
+  <div class="max-w-7xl mx-auto px-4 py-4">
+    <div class="flex justify-between items-center">
+      <div class="flex items-center space-x-2">
+        <div class="text-3xl">🍕</div>
+        <div>
+          <h1 class="text-2xl font-bold text-red-600 font-serif">
+            Pizzaria Donatello
+          </h1>
+          <p class="text-xs text-gray-600">Tradição Italiana</p>
+        </div>
+      </div>
+      
+      <nav class="hidden md:flex space-x-6">
+        <a 
+          routerLink="/home"
+          routerLinkActive="text-red-600 font-semibold"
+          class="hover:text-red-600 transition text-gray-700"
+        >
+          Inicial
+        </a>
+        <a 
+          routerLink="/menu"
+          routerLinkActive="text-red-600 font-semibold"
+          class="hover:text-red-600 transition text-gray-700"
+        >
+          Cardápio
+        </a>
+      </nav>
+
+      <div class="flex items-center space-x-4">
+        <button 
+          (click)="openCart()"
+          class="relative p-2 hover:bg-gray-100 rounded-full transition"
+        >
+          <lucide-icon name="shopping-cart" [size]="24" class="text-gray-700"></lucide-icon>
+          <span *ngIf="cartCount > 0" class="absolute -top-1 -right-1 bg-red-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+            {{ cartCount }}
+          </span>
+        </button>
+        <button *ngIf="isLoggedIn"
+          (click)="logout()"
+          class="flex items-center space-x-2 text-gray-700 hover:text-red-600 transition"
+        >
+          <lucide-icon name="log-out" [size]="20"></lucide-icon>
+          <span class="hidden md:inline">Sair</span>
+        </button>
+        <button *ngIf="!isLoggedIn"
+          (click)="logout()"
+          class="flex items-center space-x-2 text-gray-700 hover:text-red-600 transition"
+        >
+          <lucide-icon name="log-in" [size]="20"></lucide-icon>
+          <span class="hidden md:inline">Entrar</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<app-cart-modal *ngIf="showCartModal" (close)="closeCart()"></app-cart-modal>

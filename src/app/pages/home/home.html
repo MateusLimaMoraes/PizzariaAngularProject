@@ -1,0 +1,77 @@
+<div class="min-h-screen bg-gray-50">
+  <app-header></app-header>
+  
+  <section class="relative bg-gradient-to-r from-red-600 to-orange-500 text-white py-20">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+      <h1 class="text-5xl md:text-6xl font-bold mb-6 font-serif">
+        A Melhor Pizza da Cidade
+      </h1>
+      <p class="text-xl md:text-2xl mb-8 text-red-50">
+        Tradição italiana desde 1985
+      </p>
+      <button
+        (click)="goToMenu()"
+        class="bg-white text-red-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-red-50 transition transform hover:scale-105 shadow-lg"
+      >
+        Ver Cardápio
+      </button>
+    </div>
+  </section>
+
+  <section class="py-16">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-white p-8 rounded-xl shadow-md text-center">
+          <div class="text-5xl mb-4">🍕</div>
+          <h3 class="text-xl font-bold mb-2">Massa Artesanal</h3>
+          <p class="text-gray-600">Feita diariamente com ingredientes selecionados</p>
+        </div>
+        
+        <div class="bg-white p-8 rounded-xl shadow-md text-center">
+          <div class="text-5xl mb-4">🚚</div>
+          <h3 class="text-xl font-bold mb-2">Entrega Rápida</h3>
+          <p class="text-gray-600">Sua pizza quentinha em até 40 minutos</p>
+        </div>
+        
+        <div class="bg-white p-8 rounded-xl shadow-md text-center">
+          <div class="text-5xl mb-4">⭐</div>
+          <h3 class="text-xl font-bold mb-2">Qualidade Garantida</h3>
+          <p class="text-gray-600">Mais de 35 anos de tradição e sabor</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+      <h2 class="text-4xl font-bold text-center mb-12 font-serif">
+        Pizzas em Destaque
+      </h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div *ngFor="let pizza of featuredPizzas" class="bg-gray-50 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition">
+          <div class="h-48 bg-gradient-to-br from-red-100 to-orange-100 flex items-center justify-center text-6xl">
+            🍕
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">{{ pizza.name }}</h3>
+            <p class="text-gray-600 text-sm mb-4">{{ pizza.ingredients }}</p>
+            <div class="flex justify-between items-center">
+              <span class="text-2xl font-bold text-red-600">
+                R$ {{ pizza.price.toFixed(2) }}
+              </span>
+              <button
+                (click)="addToCart(pizza)"
+                class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition"
+              >
+                Pedir
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <app-footer></app-footer>
+</div>

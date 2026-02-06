@@ -1,0 +1,130 @@
+<div class="min-h-screen bg-gradient-to-br from-red-50 to-orange-50">
+    <div class="min-h-screen flex items-center justify-center px-4 py-12">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-4xl overflow-hidden">
+            <div class="grid grid-cols-1 md:grid-cols-2">
+
+                <div
+                    class="bg-gradient-to-br from-red-600 to-orange-500 p-8 md:p-12 text-white flex flex-col justify-center">
+                    <div class="text-6xl mb-6">🍕✨</div>
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4 font-serif">
+                        Junte-se à Família Donatello
+                    </h1>
+                    <p class="text-xl mb-6 text-red-50">
+                        Crie sua conta e faça parte da melhor experiência em pizza!
+                    </p>
+
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-3">
+                            <div
+                                class="bg-white bg-opacity-20 rounded-full p-2 mt-1 flex items-center justify-center w-10 h-10">
+                                <mat-icon class="icon-benefit">check_circle</mat-icon>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg">Desconto Especial Para nossos clientes</h3>
+                                <p class="text-red-100 text-sm">Comprando pelo nosso site é mais barato!</p>
+                            </div>
+                        </div>
+                        <div class="space flex items-start space-x-3">
+                            <div
+                                class="bg-white bg-opacity-20 rounded-full p-2 mt-1 flex items-center justify-center w-10 h-10">
+                                <mat-icon class="text-white" style="background: none;">check_circle</mat-icon>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg">Entrega rápida</h3>
+                                <p class="text-red-100 text-sm">Sua pizza em até 40 minutos</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Lado Direito - Formulário -->
+                <div class="p-8 md:p-12">
+                    <div class="mb-8">
+                        <h2 class="text-3xl font-bold text-gray-800 mb-2 font-serif">
+                            Criar sua Conta
+                        </h2>
+                        <p class="text-gray-600">Preencha os dados abaixo</p>
+                    </div>
+
+                    <!-- Mensagem de erro -->
+                    <div *ngIf="errorMessage"
+                        class="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg mb-4 text-sm">
+                        {{ errorMessage }}
+                    </div>
+
+                    <div class="space-y-5">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Nome Completo
+                            </label>
+                            <input type="text" [(ngModel)]="name" (blur)="validateName()" (input)="validateName()"
+                                [disabled]="isLoading" [class.border-red-500]="nameError"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition"
+                                placeholder="Nome Completo" />
+                            <p *ngIf="nameError" class="text-red-600 text-sm mt-1">{{ nameError }}</p>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Telefone
+                            </label>
+                            <input type="tel" [(ngModel)]="phone" [disabled]="isLoading" inputmode="numeric"
+                                (input)="onPhoneInput($event)"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition"
+                                placeholder="(11) 91234-5678" />
+                        </div>
+
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Email
+                            </label>
+                            <input type="email" [(ngModel)]="email" (blur)="validateEmail()" (input)="validateEmail()"
+                                [disabled]="isLoading" [class.border-red-500]="emailError"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition"
+                                placeholder="seu@email.com" />
+                            <p *ngIf="emailError" class="text-red-600 text-sm mt-1">{{ emailError }}</p>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Senha
+                            </label>
+                            <input type="password" [(ngModel)]="password" (blur)="validatePassword()"
+                                (input)="validatePassword()" [disabled]="isLoading"
+                                [class.border-red-500]="passwordError"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition"
+                                placeholder="Mínimo 6 caracteres" />
+                            <p *ngIf="passwordError" class="text-red-600 text-sm mt-1">{{ passwordError }}</p>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Confirmar Senha
+                            </label>
+                            <input type="password" [(ngModel)]="confirmPassword" (blur)="validateConfirmPassword()"
+                                (input)="validateConfirmPassword()" [disabled]="isLoading"
+                                [class.border-red-500]="confirmPasswordError"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition"
+                                placeholder="Digite a senha novamente" />
+                            <p *ngIf="confirmPasswordError" class="text-red-600 text-sm mt-1">{{ confirmPasswordError }}
+                            </p>
+                        </div>
+
+                        <button (click)="onRegister()" [disabled]="isLoading"
+                            class=" btn-submit w-full bg-red-600 text-white py-3 rounded-lg font-bold text-lg hover:bg-red-700 transition transform hover:scale-105">
+                            {{ isLoading ? 'Criando conta...' : 'Criar Minha Conta' }}
+                        </button>
+
+                        <p class="text-account text-center text-sm text-gray-600 mt-4">
+                            Já tem conta?
+                            <a routerLink="/login" class="text-red-600 hover:underline font-semibold cursor-pointer">
+                                Faça login
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
